@@ -1,0 +1,10 @@
+= MODA Coffee
+
+MODA Coffee is a fictional coffee haus that demonstrates a modular event-driven application written in Java
+
+Key components
+
+Apache ActiveMQ
+Apache CXF
+Apache Karaf
+Apache Wicket
