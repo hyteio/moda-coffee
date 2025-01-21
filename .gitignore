@@ -1,14 +1,16 @@
-# Compiled class file
+**/.classpath
+**/.DS_Store
+**/.gitignore
+**/.project
+**/.settings
+**/target
+web-parent/web-itests/data/log
+
+# Java compiled classes
 *.class
 
-# Log file
+# Log files
 *.log
-
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
 
 # Package Files #
 *.jar
