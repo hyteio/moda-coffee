@@ -33,3 +33,8 @@ git config tag.gpgsign true
 
 # Note the hostname alias 'hyteio.github.com'
 % git clone git@hyteio.github.com:hyteio/moda-coffee.git
+
+== Commit Description
+
+The commit description should contain a link to a ticket describing the change
+in the format [#<ticket-number>]
