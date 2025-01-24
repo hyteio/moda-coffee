@@ -7,6 +7,10 @@
 
 == Add key to ssh-agent so password is 'remembered'
 
+Start the ssh-agent
+% eval "$(ssh-agent -s)"
+
+Add the key to remember the password for this terminal profile session
 % ssh-add --apple-use-keychain ~/.ssh/hyteio.github.com/id_ed25519
 
 == Setup for SSH key based authentication
