@@ -1,4 +1,4 @@
-package io.modacoffee.web.page;
+package io.modacoffee.web.pages;
 
 import org.apache.wicket.Page;
 import org.apache.wicket.request.mapper.parameter.PageParameters;

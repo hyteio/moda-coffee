@@ -1,52 +1,63 @@
 package io.modacoffee.web.run;
 
-import java.io.File;
-
+import io.modacoffee.web.pages.home.HomePage;
+import io.modacoffee.web.pages.menu.MenuPage;
+import io.modacoffee.web.pages.order.checkout.OrderCheckoutPage;
+import io.modacoffee.web.pages.order.status.OrderStatusPage;
 import org.apache.wicket.Page;
 import org.apache.wicket.protocol.http.WebApplication;
 
-import io.modacoffee.web.page.HomePage;
+import java.io.File;
 
-public class ModaCoffeeWebApplication extends WebApplication {
+public class ModaCoffeeWebApplication extends WebApplication
+{
 
     @Override
-    protected void init() {
-        // set a fake karaf.home for bundle.web's upload testing.
-        System.setProperty("karaf.home", new File("." + File.separator + "target" + File.separator + "test.karaf.home").getAbsolutePath());
+    protected void init()
+    {
+        initializeKaraf();
         super.init();
+
+        mountPage("/", HomePage.class);
+        mountPage("/home", HomePage.class);
+        mountPage("/menu", MenuPage.class);
+        mountPage("/order/checkout", OrderCheckoutPage.class);
+        mountPage("/order/status", OrderStatusPage.class);
+    }
+
+    private void initializeKaraf()
+    {
+        // Set a fake karaf.home for bundle.web's upload testing.
+        System.setProperty("karaf.home", new File("." + File.separator + "target" + File.separator + "test.karaf.home").getAbsolutePath());
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
-    public Class<? extends Page> getHomePage() {
+    public Class<? extends Page> getHomePage()
+    {
         return HomePage.class;
     }
 
-//    @Override
-//    public Boot getBoot() {
-//        if (this.boot == null) {
-//            try {
-//                DefaultBoot defaultBoot = new DefaultBoot();
-//                BootConfig bootConfig = BootConfigBuilder.create().setConfigInitDisabled(false)
-//                        .setDataDir("data" + File.separator + "hyte").setModuleActivationDisabled(true)
-//                        .setServiceInitDisabled(false).setScanSource(ScanSource.CLASSLOADER).setTestModeEnabled(true)
-//                        .setFileLockingDisabled(false).setTestCloneBaseDir("src/test/resources/hyte-boot").build();
-//                defaultBoot.activate(bootConfig);
-//                DefaultLdapStoreService ldapStoreService = defaultBoot.getAppContext()
-//                        .getService(DefaultLdapStoreService.class);
-//                if (ldapStoreService != null) {
-//                    ldapStoreService.updateConfigDirectoryFromBoot(bootConfig);
-//                }
-//                this.boot = defaultBoot;
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//                throw new RuntimeException(e);
-//            }
-//        }
-//        return this.boot;
-//    }
+    //    @Override
+    //    public Boot getBoot() {
+    //        if (this.boot == null) {
+    //            try {
+    //                DefaultBoot defaultBoot = new DefaultBoot();
+    //                BootConfig bootConfig = BootConfigBuilder.create().setConfigInitDisabled(false)
+    //                        .setDataDir("data" + File.separator + "hyte").setModuleActivationDisabled(true)
+    //                        .setServiceInitDisabled(false).setScanSource(ScanSource.CLASSLOADER).setTestModeEnabled(true)
+    //                        .setFileLockingDisabled(false).setTestCloneBaseDir("src/test/resources/hyte-boot").build();
+    //                defaultBoot.activate(bootConfig);
+    //                DefaultLdapStoreService ldapStoreService = defaultBoot.getAppContext()
+    //                        .getService(DefaultLdapStoreService.class);
+    //                if (ldapStoreService != null) {
+    //                    ldapStoreService.updateConfigDirectoryFromBoot(bootConfig);
+    //                }
+    //                this.boot = defaultBoot;
+    //            } catch (Exception e) {
+    //                e.printStackTrace();
+    //                throw new RuntimeException(e);
+    //            }
+    //        }
+    //        return this.boot;
+    //    }
 }
