@@ -11,6 +11,8 @@
 
 == Setup for SSH key based authentication
 
+Add the following at the top of ~/.ssh/config:
+
 Host hyteio.github.com
   HostName github.com
   User git
