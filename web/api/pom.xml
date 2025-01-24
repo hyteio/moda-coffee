@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>io.modacoffee.web</groupId>
+    <artifactId>web</artifactId>
+    <version>5.0.0-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  <artifactId>web-api</artifactId>
+  <packaging>bundle</packaging>
+  <name>HYTE :: Moda Coffee :: Web API</name>
+  <properties>
+    <moda.osgi.import>io.modacoffee.web.v5;version="[5,6)"</moda.osgi.import>
+    <moda.osgi.export>io.modacoffee.web.api;-noimport:=true</moda.osgi.export>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>web-model</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.wicket</groupId>
+      <artifactId>wicket-core</artifactId>
+    </dependency>
+     <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+      <version>${moda.log4j2.version}</version>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
+</project>

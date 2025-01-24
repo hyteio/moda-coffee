@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+  targetNamespace="urn:modacoffee.io:web:v5"
+  xmlns:web="urn:modacoffee.io:web:v5" version="5"
+  elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+  <element name="MenuItems" type="web:MenuItems" />
+  <element name="MenuItem" type="web:MenuItem" />
+
+  <complexType name="MenuItems">
+    <sequence>
+      <element name="menuItem" type="web:MenuItem" minOccurs="0" maxOccurs="unbounded" />
+    </sequence>
+  </complexType>
+
+  <complexType name="MenuItem">
+    <attribute name="name" type="string" use="optional" />
+    <attribute name="link" type="string" use="optional" />
+  </complexType>
+
+</schema>
