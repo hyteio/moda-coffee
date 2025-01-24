@@ -1,0 +1,25 @@
+= Home Page
+
+
+== Primary navigation
+
+1. Landing page with large full-screen-ish graphic
+2. Two colored box links 
+  a. Customer experience -- "Explore as a customer"
+  b. Employee experience -- "Explore as an employee"
+  
+
+=== Customer experience
+
+1. 4 card menu with types of coffee to order
+2. Card should have an image
+3. see customer-menu-landing.png
+4. Customer can 'checkout' and view their order on the order-confirm page
+5. Thank you Page shows order submitted
+
+=== Employee experience
+
+1. Table view with list of pending orders
+2. Ability to 'take' an order
+3. Ability to makre order as 'ready'
+
