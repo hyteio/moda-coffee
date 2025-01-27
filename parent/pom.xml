@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns = "http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation = "http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.modacoffee</groupId>
   <artifactId>parent</artifactId>
@@ -21,11 +21,11 @@
     <hyte.runtime.version>4.4.6.hyte-24520</hyte.runtime.version>
     <!-- OSGi Bundle defaults -->
     <moda.osgi.version>${project.version}</moda.osgi.version>
-    <moda.osgi.export />
+    <moda.osgi.export/>
     <moda.osgi.export.defaults>
       ${project.groupId}*;version=${moda.osgi.version};-noimport:=true</moda.osgi.export.defaults>
     <moda.osgi.export.pkg>${moda.osgi.export}</moda.osgi.export.pkg>
-    <moda.osgi.import />
+    <moda.osgi.import/>
     <moda.osgi.private>!*</moda.osgi.private>
     <moda.osgi.private.pkg>${moda.osgi.private}</moda.osgi.private.pkg>
     <moda.osgi.bundle.name>${project.name}</moda.osgi.bundle.name>
@@ -35,14 +35,14 @@
     <moda.osgi.import.pkg>${moda.osgi.import},${moda.osgi.import.defaults},*</moda.osgi.import.pkg>
     <moda.osgi.failok>false</moda.osgi.failok>
     <moda.osgi.split.pkg>-split-package:=first</moda.osgi.split.pkg>
-    <moda.osgi.dynamic />
+    <moda.osgi.dynamic/>
     <moda.osgi.symbolic.name>${project.groupId}.${project.artifactId}</moda.osgi.symbolic.name>
     <moda.osgi.exclude.dependencies>false</moda.osgi.exclude.dependencies>
     <moda.osgi.resource>{maven-resources}</moda.osgi.resource>
-    <moda.osgi.services.export />
+    <moda.osgi.services.export/>
     <moda.osgi.embed.dependency>!*</moda.osgi.embed.dependency>
     <moda.osgi.embed.transitive>false</moda.osgi.embed.transitive>
-    <moda.osgi.service.component />
+    <moda.osgi.service.component/>
     <!-- Maven Plugins -->
     <build-helper-maven-plugin.version>3.0.0</build-helper-maven-plugin.version>
     <buildnumber-maven-plugin.version>3.2.1</buildnumber-maven-plugin.version>
@@ -130,7 +130,7 @@
           <target>${moda.jdk.version}</target>
           <meminitial>1024m</meminitial>
           <maxmem>2024m</maxmem>
-          <compilerArgs />
+          <compilerArgs/>
         </configuration>
       </plugin>
       <plugin>
@@ -231,7 +231,22 @@
         <filtering>false</filtering>
         <targetPath>${project.build.directory}/classes</targetPath>
       </resource>
+      <resource>
+        <directory>src/main/java</directory>
+        <filtering>false</filtering>
+        <targetPath>${project.build.directory}/classes</targetPath>
+        <includes>
+					<include>**/*.html</include>
+					<include>**/*.js</include>
+					<include>**/*.css</include>
+					<include>**/*.jpg</include>
+					<include>**/*.gif</include>
+					<include>**/*.png</include>
+        </includes>
+      </resource>
     </resources>
   </build>
 </project>
+
+
 

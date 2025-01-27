@@ -1,5 +1,7 @@
 package io.modacoffee.web.run;
 
+import de.agilecoders.wicket.core.Bootstrap;
+import de.agilecoders.wicket.core.settings.BootstrapSettings;
 import io.modacoffee.web.pages.home.HomePage;
 import io.modacoffee.web.pages.menu.MenuPage;
 import io.modacoffee.web.pages.order.checkout.OrderCheckoutPage;
@@ -8,6 +10,9 @@ import org.apache.wicket.Page;
 import org.apache.wicket.protocol.http.WebApplication;
 
 import java.io.File;
+import java.time.Duration;
+
+import static org.apache.wicket.settings.ExceptionSettings.SHOW_EXCEPTION_PAGE;
 
 public class ModaCoffeeWebApplication extends WebApplication
 {
@@ -16,13 +21,35 @@ public class ModaCoffeeWebApplication extends WebApplication
     protected void init()
     {
         initializeKaraf();
+
         super.init();
+
+        configureApacheWicket();
+        configureWicketBootstrap();
 
         mountPage("/", HomePage.class);
         mountPage("/home", HomePage.class);
         mountPage("/menu", MenuPage.class);
         mountPage("/order/checkout", OrderCheckoutPage.class);
         mountPage("/order/status", OrderStatusPage.class);
+    }
+
+    private void configureWicketBootstrap()
+    {
+        var settings = new BootstrapSettings();
+        Bootstrap.install(this, settings);
+    }
+
+    private void configureApacheWicket()
+    {
+        if (System.getenv("DEBUG").equalsIgnoreCase("true"))
+        {
+            getDebugSettings().setComponentUseCheck(true);
+            getExceptionSettings().setUnexpectedExceptionDisplay(SHOW_EXCEPTION_PAGE);
+            getResourceSettings().setResourcePollFrequency(Duration.ofSeconds(3));
+        }
+
+        getMarkupSettings().setDefaultMarkupEncoding("UTF-8");
     }
 
     private void initializeKaraf()

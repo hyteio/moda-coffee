@@ -5,10 +5,12 @@
 
 <wicket:extend>
 
-  <div>
-    <img wicket:id="background" alt="Moda Coffee" class="img-responsive img-thumbnail" src=""/>
-    <a wicket:id="menu" class="btn btn-primary">Explore as a Customer</a>
-    <a wicket:id="order-status" class="btn btn-primary">Explore as an Employee</a>
+  <div class="moda-centered">
+    <img wicket:id="background" class="moda-background" alt="Moda Coffee"/>
+    <div class="moda-centered moda-top-margin">
+      <a wicket:id="menu" class="btn btn-primary btn-lg">Explore as a Customer</a>
+      <a wicket:id="order-status" class="btn btn-primary btn-lg">Explore as an Employee</a>
+    </div>
   </div>
 
 </wicket:extend>

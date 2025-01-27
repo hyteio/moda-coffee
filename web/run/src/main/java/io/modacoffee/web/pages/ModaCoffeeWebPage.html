@@ -6,15 +6,19 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <title>Moda Coffee</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+  <wicket:link>
+    <link rel="stylesheet" href="ModaCoffeeWebPage.css" type="text/css"/>
+  </wicket:link>
 </head>
 
 <body class="container">
 
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <img wicket:id="logo" alt="Moda Coffee" class="img-responsive img-thumbnail" src=""/>
-    <wicket:child/>
-  </div>
+<img wicket:id="logo" width="128" height="128" alt="Moda Coffee" class="moda-logo" src=""/>
+
+<div wicket:id="feedback-panel"></div>
+
+<div class="moda-centered">
+  <wicket:child/>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript"></script>

@@ -1,31 +1,38 @@
 package io.modacoffee.web.pages;
 
-import de.agilecoders.wicket.core.markup.html.bootstrap.button.BootstrapBookmarkablePageLink;
-import de.agilecoders.wicket.core.markup.html.bootstrap.button.Buttons;
+import io.modacoffee.web.ModaComponent;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.image.Image;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.request.resource.PackageResourceReference;
 
 import java.io.Serial;
 
-public class ModaCoffeeWebPage extends WebPage
+public class ModaCoffeeWebPage extends WebPage implements ModaComponent
 {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    @Override
-    protected void onInitialize()
+    public ModaCoffeeWebPage()
     {
-        add(new Image("logo", imageResource("logo.png")));
+        addComponents();
     }
 
-    protected BootstrapBookmarkablePageLink<String> bookmarkablePageLink(String id, Class<? extends ModaCoffeeWebPage> pageType)
+    public ModaCoffeeWebPage(PageParameters parameters)
     {
-        return new BootstrapBookmarkablePageLink<>(id, pageType, Buttons.Type.Primary);
+        super(parameters);
+        addComponents();
     }
 
-    protected PackageResourceReference imageResource(String image)
+    private void addComponents()
     {
-        return new PackageResourceReference(getPageClass(), "images/" + image + ".jpg");
+        add(new FeedbackPanel("feedback-panel").setOutputMarkupId(true));
+        add(new Image("logo", imageResource(ModaCoffeeWebPage.class, "resources/logo.png")));
+    }
+
+    public PackageResourceReference imageResource(String image)
+    {
+        return imageResource(getPageClass(), image);
     }
 }

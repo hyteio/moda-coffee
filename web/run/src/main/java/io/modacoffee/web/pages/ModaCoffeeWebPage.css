@@ -1,0 +1,51 @@
+
+:root {
+
+  --moda-brown: #663300;
+  --moda-green: #003300;
+  --moda-dark-gray: #2C3E4A;
+  --moda-light-gray: #999999;
+  --moda-light-brown: #CC9966;
+
+  --border: var(--moda-brown);
+}
+
+body {
+    font-family: 'Avenir', sans-serif;
+}
+
+.btn {
+
+}
+
+.moda-logo {
+    margin-left: 0
+    margin-right: 0
+    margin-top: 10
+    margin-bottom: 10
+}
+
+.moda-centered {
+    text-align: centered;
+    justify-content: center;
+    align-items: center;
+}
+
+.moda-top-margin {
+    margin-top: 10px
+}
+
+.moda-item {
+    margin-top: 10px;
+    border-width: 1px;
+    border-color: var(--border)
+}
+
+.moda-item-picture {
+    width: 256px;
+    height: 256px;
+}
+
+.moda-item-name {
+}
+
