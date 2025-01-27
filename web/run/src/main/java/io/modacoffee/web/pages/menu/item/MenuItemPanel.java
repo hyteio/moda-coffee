@@ -6,13 +6,10 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
-import org.apache.wicket.request.resource.ResourceReference;
-
-import java.util.function.Function;
 
 public class MenuItemPanel extends Panel implements ModaComponent
 {
-    public MenuItemPanel(final String id, final IModel<MenuItem> model, Function<String, ResourceReference> resources)
+    public MenuItemPanel(final String id, final IModel<MenuItem> model)
     {
         super(id, model);
 
@@ -20,7 +17,7 @@ public class MenuItemPanel extends Panel implements ModaComponent
 
         add(new Label("item-name", () -> name));
         add(new Label("item-cost", "$9,000"));
-        add(new Image("item-picture", resources.apply(name)));
+        add(new Image("item-picture", imageResource(getClass(), "resources/" + name + ".jpg")));
         add(ajaxLink("item-add-to-cart", "Add to Cart", ajax ->
         {
             info("Item added");

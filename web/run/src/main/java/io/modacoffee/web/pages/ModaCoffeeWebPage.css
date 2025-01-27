@@ -6,8 +6,6 @@
   --moda-dark-gray: #2C3E4A;
   --moda-light-gray: #999999;
   --moda-light-brown: #CC9966;
-
-  --border: var(--moda-brown);
 }
 
 body {
@@ -38,7 +36,7 @@ body {
 .moda-item {
     margin-top: 10px;
     border-width: 1px;
-    border-color: var(--border)
+    border-color: var(--moda-brown)
 }
 
 .moda-item-picture {
@@ -49,3 +47,12 @@ body {
 .moda-item-name {
 }
 
+.moda-order {
+    margin-top: 10px;
+    border-width: 1px;
+    border-color: var(--moda-brown)
+}
+
+.moda-order-name {
+    width: 300px;
+}

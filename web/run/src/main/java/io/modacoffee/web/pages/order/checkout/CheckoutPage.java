@@ -1,4 +1,4 @@
-package io.modacoffee.web.pages.menu;
+package io.modacoffee.web.pages.order.checkout;
 
 import io.modacoffee.web.pages.ModaCoffeeWebPage;
 import io.modacoffee.web.pages.menu.item.MenuItemPanel;
@@ -8,20 +8,19 @@ import org.apache.wicket.markup.repeater.RepeatingView;
 import java.io.Serial;
 import java.util.List;
 
-public class MenuPage extends ModaCoffeeWebPage
+public class CheckoutPage extends ModaCoffeeWebPage
 {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    public MenuPage()
+    public CheckoutPage()
     {
-        var repeater = new RepeatingView("items-repeater");
+        var repeater = new RepeatingView("orders-repeater");
         for (var item : items())
         {
             repeater.add(new MenuItemPanel(repeater.newChildId(), () -> item));
         }
         add(repeater);
-        // add(bookmarkablePageLink("checkout", CheckoutPage.class, "Check Out"));
     }
 
     private List<MenuItem> items()

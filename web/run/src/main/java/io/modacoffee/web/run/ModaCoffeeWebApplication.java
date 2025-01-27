@@ -4,7 +4,7 @@ import de.agilecoders.wicket.core.Bootstrap;
 import de.agilecoders.wicket.core.settings.BootstrapSettings;
 import io.modacoffee.web.pages.home.HomePage;
 import io.modacoffee.web.pages.menu.MenuPage;
-import io.modacoffee.web.pages.order.checkout.OrderCheckoutPage;
+import io.modacoffee.web.pages.order.checkout.CheckoutPage;
 import io.modacoffee.web.pages.order.status.OrderStatusPage;
 import org.apache.wicket.Page;
 import org.apache.wicket.protocol.http.WebApplication;
@@ -30,7 +30,7 @@ public class ModaCoffeeWebApplication extends WebApplication
         mountPage("/", HomePage.class);
         mountPage("/home", HomePage.class);
         mountPage("/menu", MenuPage.class);
-        mountPage("/order/checkout", OrderCheckoutPage.class);
+        mountPage("/order/checkout", CheckoutPage.class);
         mountPage("/order/status", OrderStatusPage.class);
     }
 

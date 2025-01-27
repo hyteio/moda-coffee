@@ -23,7 +23,7 @@ public interface ModaComponent
 
     default BootstrapAjaxLink<Void> ajaxLink(String id, String label, Consumer<AjaxRequestTarget> code)
     {
-        return new BootstrapAjaxLink<>(id, null, Buttons.Type.Link, new Model<>(label))
+        return new BootstrapAjaxLink<>(id, null, Buttons.Type.Primary, new Model<>(label))
         {
             @Override
             public void onClick(final AjaxRequestTarget target)
@@ -49,7 +49,7 @@ public interface ModaComponent
             .setLabel(() -> label);
     }
 
-    default PackageResourceReference imageResource(Class<? extends Page> type, String image)
+    default PackageResourceReference imageResource(Class<? extends Component> type, String image)
     {
         return new PackageResourceReference(type, image);
     }
