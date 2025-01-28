@@ -7,7 +7,10 @@ import io.modacoffee.web.pages.menu.MenuPage;
 import io.modacoffee.web.pages.order.checkout.CheckoutPage;
 import io.modacoffee.web.pages.order.status.OrderStatusPage;
 import org.apache.wicket.Page;
+import org.apache.wicket.Session;
 import org.apache.wicket.protocol.http.WebApplication;
+import org.apache.wicket.request.Request;
+import org.apache.wicket.request.Response;
 
 import java.io.File;
 import java.time.Duration;
@@ -25,7 +28,7 @@ public class ModaCoffeeWebApplication extends WebApplication
         super.init();
 
         configureApacheWicket();
-        configureWicketBootstrap();
+        configureApacheWicketBootstrap();
 
         mountPage("/", HomePage.class);
         mountPage("/home", HomePage.class);
@@ -34,7 +37,13 @@ public class ModaCoffeeWebApplication extends WebApplication
         mountPage("/order/status", OrderStatusPage.class);
     }
 
-    private void configureWicketBootstrap()
+    @Override
+    public Session newSession(final Request request, final Response response)
+    {
+        return new ModaCoffeeSession(request);
+    }
+
+    private void configureApacheWicketBootstrap()
     {
         var settings = new BootstrapSettings();
         Bootstrap.install(this, settings);

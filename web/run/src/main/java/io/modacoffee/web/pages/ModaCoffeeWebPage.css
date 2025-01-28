@@ -8,12 +8,14 @@
   --moda-light-brown: #CC9966;
 }
 
+/* All Pages */
+
 body {
     font-family: 'Avenir', sans-serif;
 }
 
 .btn {
-
+    color: var(--moda-green)
 }
 
 .moda-logo {
@@ -33,26 +35,49 @@ body {
     margin-top: 10px
 }
 
-.moda-item {
+/* Menu Items */
+
+.moda-menu-item {
     margin-top: 10px;
     border-width: 1px;
     border-color: var(--moda-brown)
 }
 
-.moda-item-picture {
+.moda-menu-item-picture {
     width: 256px;
     height: 256px;
 }
 
-.moda-item-name {
+.moda-menu-item-name {
 }
+
+.moda-menu-item-cost {
+}
+
+.moda-menu-item-quantity {
+}
+
+/* Cart Items */
+
+.moda-cart-item {
+    margin-top: 10px;
+    border-width: 1px;
+    border-color: var(--moda-brown)
+}
+
+.moda-cart-item-name {
+}
+
+.moda-cart-item-cost {
+}
+
+.moda-cart-item-quantity {
+}
+
+/* Orders */
 
 .moda-order {
     margin-top: 10px;
     border-width: 1px;
     border-color: var(--moda-brown)
-}
-
-.moda-order-name {
-    width: 300px;
 }

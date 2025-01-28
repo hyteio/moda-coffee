@@ -17,8 +17,8 @@ public class HomePage extends ModaCoffeeWebPage
     {
         super(parameters);
 
-        add(new Image("background", imageResource("resources/background.jpg")));
-        add(bookmarkablePageLink("menu", MenuPage.class, "Explore as a Customer"));
-        add(bookmarkablePageLink("order-status", OrderStatusPage.class, "Explore as an Employee"));
+        add(new Image("background", imageResource(getClass(), "resources/ModaCoffeeBackground.jpg")));
+        add(newButtonLink("menu", MenuPage.class, "Explore as a Customer"));
+        add(newButtonLink("order-status", OrderStatusPage.class, "Explore as an Employee"));
     }
 }
