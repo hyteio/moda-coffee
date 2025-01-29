@@ -20,7 +20,7 @@ public class MenuItemPanel extends Panel implements ModaCoffeeComponent
         add(new MenuItemPicturePanel("picture", model));
         add(newAjaxButton("add-to-cart", "Add to Cart", ajax ->
         {
-            session(this).cart().add(model.getObject());
+            cart(this).add(model.getObject());
             info("Added '" + model.getObject().name() + "' to cart");
             updateFeedbackPanel(this, ajax);
         }));

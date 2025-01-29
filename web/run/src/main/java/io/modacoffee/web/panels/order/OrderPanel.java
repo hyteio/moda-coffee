@@ -21,7 +21,6 @@ public class OrderPanel extends Panel implements ModaCoffeeComponent
         {
             repeater.add(new CartItemPanel(repeater.newChildId(), () -> item));
         }
-        repeater.setOutputMarkupId(true);
         add(repeater);
 
         // then add a button to cancel the order,

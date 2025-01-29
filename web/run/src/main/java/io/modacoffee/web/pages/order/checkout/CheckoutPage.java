@@ -3,7 +3,6 @@ package io.modacoffee.web.pages.order.checkout;
 import io.modacoffee.web.pages.ModaCoffeeWebPage;
 import io.modacoffee.web.pages.order.thanks.ThankYouPage;
 import io.modacoffee.web.panels.cart.CartPanel;
-import org.apache.wicket.RestartResponseException;
 import org.apache.wicket.markup.html.basic.Label;
 
 import java.io.Serial;
@@ -34,7 +33,7 @@ public class CheckoutPage extends ModaCoffeeWebPage
             cart.clear();
 
             // and thank them.
-            throw new RestartResponseException(ThankYouPage.class);
+            setResponsePage(ThankYouPage.class);
         }));
     }
 }

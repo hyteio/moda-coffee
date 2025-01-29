@@ -6,6 +6,7 @@ import io.modacoffee.web.pages.home.HomePage;
 import io.modacoffee.web.pages.menu.MenuPage;
 import io.modacoffee.web.pages.order.checkout.CheckoutPage;
 import io.modacoffee.web.pages.order.status.OrderStatusPage;
+import io.modacoffee.web.pages.order.thanks.ThankYouPage;
 import org.apache.wicket.Page;
 import org.apache.wicket.Session;
 import org.apache.wicket.protocol.http.WebApplication;
@@ -37,6 +38,7 @@ public class ModaCoffeeWebApplication extends WebApplication
         mountPage("/menu", MenuPage.class);
         mountPage("/order/checkout", CheckoutPage.class);
         mountPage("/order/status", OrderStatusPage.class);
+        mountPage("/order/thank-you", ThankYouPage.class);
     }
 
     @Override
