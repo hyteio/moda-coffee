@@ -18,6 +18,6 @@ public class CartItemPanel extends Panel implements ModaCoffeeComponent
         add(new Label("name", () -> model.getObject().item().name()));
         add(new Label("cost", NumberFormat.getCurrencyInstance().format(model.getObject().item().cost())));
         add(new MenuItemPicturePanel("picture", () -> model.getObject().item()));
-        add(new Label("quantity", () -> "$" + model.getObject().quantity()));
+        add(new Label("quantity", () -> model.getObject().quantity()));
     }
 }

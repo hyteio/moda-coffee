@@ -2,8 +2,8 @@ package io.modacoffee.web.pages.menu;
 
 import io.modacoffee.web.model.Inventory;
 import io.modacoffee.web.pages.ModaCoffeeWebPage;
-import io.modacoffee.web.panels.menu.item.MenuItemPanel;
 import io.modacoffee.web.pages.order.checkout.CheckoutPage;
+import io.modacoffee.web.panels.menu.item.MenuItemPanel;
 import org.apache.wicket.markup.repeater.RepeatingView;
 
 import java.io.Serial;

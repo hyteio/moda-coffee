@@ -11,10 +11,12 @@ import org.apache.wicket.Session;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.request.Request;
 import org.apache.wicket.request.Response;
+import org.apache.wicket.util.file.Path;
 
 import java.io.File;
 import java.time.Duration;
 
+import static org.apache.wicket.RuntimeConfigurationType.DEVELOPMENT;
 import static org.apache.wicket.settings.ExceptionSettings.SHOW_EXCEPTION_PAGE;
 
 public class ModaCoffeeWebApplication extends WebApplication
@@ -51,11 +53,14 @@ public class ModaCoffeeWebApplication extends WebApplication
 
     private void configureApacheWicket()
     {
-        if (System.getenv("DEBUG").equalsIgnoreCase("true"))
+        if (getConfigurationType() == DEVELOPMENT)
         {
             getDebugSettings().setComponentUseCheck(true);
+            getDebugSettings().setDevelopmentUtilitiesEnabled(true);
             getExceptionSettings().setUnexpectedExceptionDisplay(SHOW_EXCEPTION_PAGE);
-            getResourceSettings().setResourcePollFrequency(Duration.ofSeconds(3));
+            getResourceSettings().setResourcePollFrequency(Duration.ofSeconds(1));
+            var finders = getResourceSettings().getResourceFinders();
+            finders.addFirst(new Path("src/main/java"));
         }
 
         getMarkupSettings().setDefaultMarkupEncoding("UTF-8");

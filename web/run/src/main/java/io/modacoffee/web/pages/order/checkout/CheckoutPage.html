@@ -6,8 +6,14 @@
 <wicket:extend>
 
   <div wicket:id="cart"></div>
-  <span wicket:id="total-cost"/>
-  <a wicket:id="place-order" class="btn btn-primary btn-lg">Place Order</a>
+
+  <div class="moda-top-margin">
+    Total: $<span wicket:id="total"/>
+  </div>
+
+  <div class="moda-top-margin">
+    <a wicket:id="place-order" class="moda-top-margin btn btn-primary btn-lg">Place Order</a>
+  </div>
 
 </wicket:extend>
 

@@ -89,7 +89,15 @@ public interface ModaCoffeeComponent
      */
     default void updateFeedbackPanel(Component component, AjaxRequestTarget ajax)
     {
-        var feedbackPanel = component.findParent(ModaCoffeeWebPage.class).get("feedback-panel");
-        ajax.add(feedbackPanel);
+        var feedbackPanel = component.findParent(ModaCoffeeWebPage.class);
+        if (feedbackPanel == null && component instanceof ModaCoffeeWebPage)
+        {
+            feedbackPanel = (ModaCoffeeWebPage) component;
+        }
+        if (feedbackPanel != null)
+        {
+            feedbackPanel.get("feedback-panel");
+            ajax.add(feedbackPanel);
+        }
     }
 }

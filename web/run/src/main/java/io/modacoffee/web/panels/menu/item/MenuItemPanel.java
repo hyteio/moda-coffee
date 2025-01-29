@@ -21,7 +21,7 @@ public class MenuItemPanel extends Panel implements ModaCoffeeComponent
         add(newAjaxButton("add-to-cart", "Add to Cart", ajax ->
         {
             session(this).cart().add(model.getObject());
-            info("Item added");
+            info("Added '" + model.getObject().name() + "' to cart");
             updateFeedbackPanel(this, ajax);
         }));
     }

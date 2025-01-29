@@ -44,8 +44,9 @@ body {
 }
 
 .moda-menu-item-picture {
-    width: 256px;
-    height: 256px;
+    margin-top: 10px;
+    width: 128px;
+    height: 128px;
 }
 
 .moda-menu-item-name {

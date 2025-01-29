@@ -17,7 +17,7 @@ public class OrderStatusPage extends ModaCoffeeWebPage
         var repeater = new RepeatingView("orders");
         for (var order : orderQueue().orders())
         {
-            repeater.add(new OrderPanel(repeater.newChildId(), () -> order));
+            repeater.add(new OrderPanel(repeater.newChildId(), OrderStatusPage.class, () -> order));
         }
         add(repeater);
     }
