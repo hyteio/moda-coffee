@@ -4,14 +4,22 @@
 
 <wicket:panel>
 
-  <div class="moda-cart-item">
-
-    <div wicket:id="picture"/>
-
-    <span wicket:id="name" class="cart-item-name"/>
-    <span wicket:id="cost" class="cart-item-cost"/>
-    <span wicket:id="quantity" class="cart-item-quantity"/>
-
+  <div class="card mb-3 moda-cart-item">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <div wicket:id="picture" class="card-img-top"/>
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 wicket:id="name" class="card-title cart-item-name"/>
+          <p>
+            Cost: <span wicket:id="cost" class="card-text cart-item-cost"/>
+            <br/>
+            Quantity: <span wicket:id="quantity" class="card-text cart-item-quantity"/>
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 
 </wicket:panel>

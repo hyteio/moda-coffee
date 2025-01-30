@@ -27,7 +27,7 @@ public class OrderPanel extends Panel implements ModaCoffeeComponent
         add(newAjaxButton("cancel", "Cancel", ajax ->
         {
             orderQueue().cancel(model.getObject());
-            getWebSession().info("Order cancelled.");
+            getWebSession().info("Order cancelled");
             updateFeedbackPanel(this, ajax);
             setResponsePage(refresh);
         }));
@@ -36,7 +36,7 @@ public class OrderPanel extends Panel implements ModaCoffeeComponent
         add(newAjaxButton("complete", "Complete", ajax ->
         {
             orderQueue().complete(model.getObject());
-            getWebSession().info("Order completed.");
+            getWebSession().info("Order completed");
             updateFeedbackPanel(this, ajax);
             setResponsePage(refresh);
         }));

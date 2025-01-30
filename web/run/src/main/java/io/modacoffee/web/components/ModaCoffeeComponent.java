@@ -45,8 +45,7 @@ public interface ModaCoffeeComponent
      * Returns a new Bootstrap button that links to the given bookmarkable page using the given label
      */
     default BootstrapBookmarkablePageLink<String> newButtonLink(String id,
-                                                                Class<? extends Page> pageType,
-                                                                String label)
+                                                                String label, Class<? extends Page> pageType)
     {
         return new BootstrapBookmarkablePageLink<String>(id, pageType, new PageParameters(), Buttons.Type.Primary)
             .setLabel(() -> label);

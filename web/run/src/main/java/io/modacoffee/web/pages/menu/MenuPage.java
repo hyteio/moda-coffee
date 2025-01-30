@@ -24,6 +24,6 @@ public class MenuPage extends ModaCoffeeWebPage
         add(repeater);
 
         // and add a bookmarkable button link to the checkout page.
-        add(newButtonLink("checkout", CheckoutPage.class, "Check Out"));
+        add(newButtonLink("checkout", "Check Out", CheckoutPage.class));
     }
 }

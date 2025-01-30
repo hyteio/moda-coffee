@@ -1,20 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket="https://wicket.apache.org/dtds.data/wicket-9.xsd" lang="en">
+<body>
 
 <wicket:panel>
 
-  <div class="moda-item">
-
-    <img wicket:id="picture"/>
-
-    <span wicket:id="name" class="moda-menu-item-name"/>
-    <span wicket:id="cost" class="moda-menu-item-cost"/>
-
-    <a wicket:id="add-to-cart" class="btn btn-primary">Add to Cart</a>
-
+  <div class="card mb-3 moda-menu-item">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <div wicket:id="picture" class="card-img-top"/>
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 wicket:id="name" class="card-title cart-item-name"/>
+          <p wicket:id="cost" class="card-text cart-item-cost"/>
+          <a wicket:id="add-to-cart" class="btn btn-primary">Add to Cart</a>
+        </div>
+      </div>
+    </div>
   </div>
 
 </wicket:panel>
 
+</body>
 </html>
