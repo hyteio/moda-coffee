@@ -8,9 +8,6 @@ import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import java.io.Serial;
-import java.util.List;
-
-import static io.modacoffee.web.panels.card.CardPanelButton.ButtonSettings.button;
 
 public class HomePage extends ModaCoffeeWebPage
 {
@@ -23,16 +20,16 @@ public class HomePage extends ModaCoffeeWebPage
 
         add(new Image("background", imageResource(getClass(), "resources/ModaCoffeeBackground.jpg")));
 
-        add(new CardPanel("customer-explore-card", new CardPanel.Settings(
-            getString("customer-explore-title"),
-            getString("customer-explore-body"),
-            null,
-            List.of(button(getString("customer-explore-button-label"), MenuPage.class)))));
+        add(CardPanel.builder("customer-explore-card")
+            .title(getString("customer-explore-title"))
+            .text(getString("customer-explore-text"))
+            .buttonLink(getString("customer-explore-button-label"), MenuPage.class)
+            .build());
 
-        add(new CardPanel("employee-explore-card", new CardPanel.Settings(
-            getString("employee-explore-title"),
-            getString("employee-explore-body"),
-            null,
-            List.of(button(getString("employee-explore-button-label"), OrderStatusPage.class)))));
+        add(CardPanel.builder("employee-explore-card")
+            .title(getString("employee-explore-title"))
+            .text(getString("employee-explore-text"))
+            .buttonLink(getString("employee-explore-button-label"), OrderStatusPage.class)
+            .build());
     }
 }
