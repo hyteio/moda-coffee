@@ -13,6 +13,12 @@
   --moda-white: #D9D9D9;
 }
 
+/* Debugging */
+
+.debug {
+    background-color: #FF0000;
+}
+
 /* All Pages */
 
 body {
