@@ -14,8 +14,8 @@ public class AttributeModifier extends org.apache.wicket.AttributeModifier
     {
         APPEND,
         PREPEND,
-        REPLACE,
-        REMOVE
+        REMOVE,
+        SET
     }
 
     private final ModificationType modification;
@@ -44,7 +44,7 @@ public class AttributeModifier extends org.apache.wicket.AttributeModifier
         {
             case APPEND -> attributes.add(value);
             case PREPEND -> attributes.addFirst(value);
-            case REPLACE -> attributes = List.of(value);
+            case SET -> attributes = List.of(value);
             case REMOVE -> attributes.remove(value);
         }
         return String.join(" ", attributes);

@@ -1,7 +1,7 @@
 package io.modacoffee.web.pages;
 
 import io.modacoffee.web.components.ModaCoffeeComponent;
-import io.modacoffee.web.components.styling.Style;
+import io.modacoffee.web.components.styling.Styler;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
@@ -22,7 +22,7 @@ public class ModaCoffeeWebPage extends WebPage implements ModaCoffeeComponent
     @Serial
     private static final long serialVersionUID = 1L;
 
-    private transient Style style = null;
+    private transient Styler styler = null;
 
     public ModaCoffeeWebPage()
     {
@@ -49,16 +49,16 @@ public class ModaCoffeeWebPage extends WebPage implements ModaCoffeeComponent
         }
     }
 
-    private Style style()
+    private Styler style()
     {
-        if (style == null)
+        if (styler == null)
         {
             try (var input = getClass().getResourceAsStream(getPageClass().getSimpleName() + ".style"))
             {
                 if (input != null)
                 {
                     var text = new String(input.readAllBytes(), StandardCharsets.UTF_8);
-                    style = Style.parse(lines(text));
+                    styler = Styler.parse(lines(text));
                 }
                 return null;
             }
@@ -67,7 +67,7 @@ public class ModaCoffeeWebPage extends WebPage implements ModaCoffeeComponent
                 throw new RuntimeException(e);
             }
         }
-        return style;
+        return styler;
     }
 
     private List<String> lines(String text)

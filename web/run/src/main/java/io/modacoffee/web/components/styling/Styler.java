@@ -5,13 +5,13 @@ import org.apache.wicket.Page;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Style
+public class Styler
 {
     private final List<StyleRule> rules = new ArrayList<>();
 
-    public static Style parse(List<String> rules)
+    public static Styler parse(List<String> rules)
     {
-        var style = new Style();
+        var style = new Styler();
         for (var at : rules)
         {
             if (!at.isBlank())

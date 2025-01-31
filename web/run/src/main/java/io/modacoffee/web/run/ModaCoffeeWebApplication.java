@@ -57,10 +57,18 @@ public class ModaCoffeeWebApplication extends WebApplication
     {
         if (getConfigurationType() == DEVELOPMENT)
         {
-            getDebugSettings().setComponentUseCheck(true);
-            getDebugSettings().setDevelopmentUtilitiesEnabled(true);
+            getDebugSettings()
+                .setComponentUseCheck(true)
+                .setDevelopmentUtilitiesEnabled(true)
+                .setOutputMarkupContainerClassName(true);
+
             getExceptionSettings().setUnexpectedExceptionDisplay(SHOW_EXCEPTION_PAGE);
             getResourceSettings().setResourcePollFrequency(Duration.ofSeconds(1));
+
+            getMarkupSettings()
+                .setStripWicketTags(false)
+                .setStripComments(false);
+
             var finders = getResourceSettings().getResourceFinders();
             finders.addFirst(new Path("src/main/java"));
         }
