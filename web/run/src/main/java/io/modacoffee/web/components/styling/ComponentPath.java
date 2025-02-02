@@ -12,7 +12,7 @@ public class ComponentPath implements Iterable<String>
 {
     private final List<String> path = new LinkedList<>();
 
-    public static ComponentPath parse(String text)
+    public static ComponentPath parseComponentPath(String text)
     {
         return new ComponentPath().addAll(text.split("/"));
     }

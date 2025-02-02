@@ -1,50 +1,35 @@
 package io.modacoffee.web.components.styling;
 
 import org.apache.wicket.Component;
-import org.apache.wicket.WicketRuntimeException;
 
-import static io.modacoffee.web.components.styling.AttributeModifier.ModificationType;
+import static io.modacoffee.web.components.styling.AttributeModifier.Modification;
 
 /**
  * If the component path matches the pattern, the given attribute is modified by applying the given modification with
  * the given value.
  *
  * @param pattern The component path pattern that should be modified, like "HomePage/sign-in/&#42;/button"
+ * @param modification The modification to make (append, prepend or replace)
  * @param attribute The attribute to change like "class"
- * @param modificationType The modification to make (append, prepend or replace)
  * @param value The value to apply
  */
-public record StyleRule(ComponentPathPattern pattern, String attribute, ModificationType modificationType,
+public record StyleRule(ComponentPathPattern pattern,
+                        Modification modification,
+                        String attribute,
                         String value)
 {
     /**
-     * Parses a textually defined rule such as "HomePage/sign-in/&#42;/button:class:append:moda-button"
+     * Apply this style rule to the given component
      *
-     * @param rule The rule to parse
-     * @return The styling rule
+     * @param component The component to style
      */
-    public static StyleRule parse(String rule)
-    {
-        var parts = rule.split(":");
-        if (parts.length != 4)
-        {
-            throw new WicketRuntimeException("Styling rules must have 4 components: pattern:attribute:modification-type:value");
-        }
-
-        var pattern = ComponentPathPattern.parse(parts[0]);
-        var attribute = parts[1];
-        var modificationType = ModificationType.valueOf(parts[2].toUpperCase());
-        var value = parts[3];
-
-        return new StyleRule(pattern, attribute, modificationType, value);
-    }
-
     public void apply(Component component)
     {
-        var path = new ComponentPath(component);
-        if (pattern.matches(path))
+        // If the path pattern matches the path for the given component,
+        if (pattern.matches(new ComponentPath(component)))
         {
-            component.add(new AttributeModifier(attribute, modificationType, value));
+            // then add the attribute modifier that will make the change specified by the rule.
+            component.add(new AttributeModifier(modification, attribute, value));
         }
     }
 }

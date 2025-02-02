@@ -1,17 +1,17 @@
 package io.modacoffee.web.pages;
 
 import io.modacoffee.web.components.ModaCoffeeComponent;
+import io.modacoffee.web.components.styling.StyleYamlParser;
 import io.modacoffee.web.components.styling.Styler;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.apache.wicket.util.resource.ResourceStreamNotFoundException;
 
 import java.io.IOException;
 import java.io.Serial;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Base class for all web pages on the Moda Coffee web site. The logo that appears on all pages is added here as well as
@@ -42,36 +42,49 @@ public class ModaCoffeeWebPage extends WebPage implements ModaCoffeeComponent
     {
         super.onBeforeRender();
 
-        var style = style();
-        if (style != null)
+        var styler = styler();
+        if (styler != null)
         {
-            style.apply(this);
+            styler.apply(this);
         }
     }
 
-    private Styler style()
+    private Styler styler()
     {
+        // If we haven't already found the styler rules,
         if (styler == null)
         {
-            try (var input = getClass().getResourceAsStream(getPageClass().getSimpleName() + ".style"))
+            // loop through the application's resource finders,
+            for (var finder : getApplication().getResourceSettings().getResourceFinders())
             {
-                if (input != null)
+                // and if the finder locates the resource <page-class>.style.yaml,
+                try (var resource = finder.find(getPageClass(), getPageClass().getSimpleName() + ".style.yaml"))
                 {
-                    var text = new String(input.readAllBytes(), StandardCharsets.UTF_8);
-                    styler = Styler.parse(lines(text));
+                    if (resource != null)
+                    {
+                        // get the resource's input stream,
+                        try (var input = resource.getInputStream())
+                        {
+                            if (input != null)
+                            {
+                                // read all text from that stream,
+                                var text = new String(input.readAllBytes(), StandardCharsets.UTF_8);
+
+                                // parse the rules from the text, and create the page styler.
+                                styler = new Styler(new StyleYamlParser().parseRules(text));
+                                return styler;
+                            }
+                        }
+                        catch (ResourceStreamNotFoundException ignored)
+                        {
+                        }
+                    }
                 }
-                return null;
-            }
-            catch (IOException e)
-            {
-                throw new RuntimeException(e);
+                catch (IOException ignored)
+                {
+                }
             }
         }
         return styler;
-    }
-
-    private List<String> lines(String text)
-    {
-        return Arrays.stream(text.split("\n")).toList();
     }
 }

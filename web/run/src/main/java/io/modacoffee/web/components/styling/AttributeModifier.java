@@ -10,24 +10,29 @@ import java.util.List;
  */
 public class AttributeModifier extends org.apache.wicket.AttributeModifier
 {
-    public enum ModificationType
+    public enum Modification
     {
         APPEND,
         PREPEND,
         REMOVE,
-        SET
+        SET;
+
+        public static Modification parseModification(String value)
+        {
+            return valueOf(value.toUpperCase());
+        }
     }
 
-    private final ModificationType modification;
+    private final Modification modification;
 
     private final String value;
 
     /**
-     * @param attribute The attribute name
      * @param modification The type of modification to perform
+     * @param attribute The attribute name
      * @param value The value to append-to, prepend-to or replace the existing value
      */
-    public AttributeModifier(String attribute, ModificationType modification, String value)
+    public AttributeModifier(Modification modification, String attribute, String value)
     {
         super(attribute, value);
 

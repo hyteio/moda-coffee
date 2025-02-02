@@ -2,20 +2,21 @@ package io.modacoffee.web.components.styling;
 
 public class ComponentPathPattern extends ComponentPath
 {
-    public static ComponentPathPattern parse(String pattern)
+    public static ComponentPathPattern parseComponentPathPattern(String pattern)
     {
         return (ComponentPathPattern) new ComponentPathPattern().addAll(pattern.split("/"));
     }
 
-    protected ComponentPathPattern()
-    {
-        super();
-    }
-
+    /**
+     * Returns true if this component path pattern matches the given component path
+     *
+     * @param candidate The candidate path to match against
+     * @return True if the candidate is accepted by this pattern
+     */
     public boolean matches(ComponentPath candidate)
     {
-        // If the pattern and the path are the same length,
-        if (candidate.size() == size())
+        // If this pattern and the candidate path are the same length,
+        if (size() == candidate.size())
         {
             // then just compare each element 1:1.
             return matchEachElement(candidate);
@@ -53,8 +54,17 @@ public class ComponentPathPattern extends ComponentPath
         return false;
     }
 
+    /**
+     * Checks this pattern element-by element against the candidate path. The candidate path must be the same length as
+     * this path pattern.
+     *
+     * @param candidate The candidate path to match
+     * @return True if the candidate matches this pattern.
+     */
     private boolean matchEachElement(final ComponentPath candidate)
     {
+        assert size() == candidate.size();
+
         var index = 0;
 
         // For each element in the given path,

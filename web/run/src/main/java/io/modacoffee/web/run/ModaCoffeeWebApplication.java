@@ -63,17 +63,15 @@ public class ModaCoffeeWebApplication extends WebApplication
                 .setOutputMarkupContainerClassName(true);
 
             getExceptionSettings().setUnexpectedExceptionDisplay(SHOW_EXCEPTION_PAGE);
-            getResourceSettings().setResourcePollFrequency(Duration.ofSeconds(1));
 
             getMarkupSettings()
                 .setStripWicketTags(false)
                 .setStripComments(false);
 
-            var finders = getResourceSettings().getResourceFinders();
-            finders.addFirst(new Path("src/main/java"));
+            getResourceSettings()
+                .setResourcePollFrequency(Duration.ofSeconds(1))
+                .getResourceFinders().addFirst(new Path("src/main/java"));
         }
-
-        getMarkupSettings().setDefaultMarkupEncoding("UTF-8");
     }
 
     private void initializeKaraf()
