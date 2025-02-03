@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket="https://wicket.apache.org/dtds.data/wicket-9.xsd" lang="en">
+<body>
+
+<wicket:extend>
+
+  <div class="row row-cols-2 g-2 w-75">
+    <div wicket:id="cart" style="width: 300px"></div>
+  </div>
+
+  <div class="moda-top-margin">
+    Total: $<span wicket:id="total"/>
+  </div>
+
+  <div class="moda-top-margin">
+    <a wicket:id="place-order" class="moda-top-margin btn btn-primary btn-lg">Place Order</a>
+  </div>
+
+</wicket:extend>
+
+</body>
+</html>

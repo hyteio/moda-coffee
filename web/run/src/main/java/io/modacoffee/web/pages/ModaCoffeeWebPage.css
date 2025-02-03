@@ -1,0 +1,229 @@
+
+:root {
+
+  --moda-brown: #663300;
+  --moda-light-brown: #FFCC99;
+  --moda-green: #003300;
+  --moda-light-green: #336633;
+  --moda-bright-green: #99FF99;
+  --moda-dark-gray: #2C3E4A;
+  --moda-light-gray: #999999;
+  --moda-red: #660000;
+  --moda-orange: #663300;
+  --moda-white: #D9D9D9;
+}
+
+/* Debugging */
+
+.debug {
+    background-color: #FF0000;
+}
+
+/* All Pages */
+
+body {
+    font-family: 'Avenir', sans-serif;
+    background-color: var(--moda-light-brown);
+}
+
+.moda-background-image {
+    z-index: -1;
+}
+
+.moda-logo {
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.moda-centered {
+    text-align: centered;
+    justify-content: center;
+    align-items: center;
+}
+
+.moda-top-margin {
+    margin-top: 10px
+}
+
+/* Wicket */
+
+.feedbackPanelERROR {
+    color: var(--moda-red);
+}
+
+.feedbackPanelINFO {
+    color: var(--moda-light-green);
+    font-size: large;
+    font-weight: bold;
+}
+
+/* Bootstrap Colors */
+
+.text-primary {
+    color: var(--moda-dark-gray)
+}
+
+.text-secondary {
+    color: var(--moda-dark-gray)
+}
+
+.text-success {
+    color: var(--moda-green)
+}
+
+.text-danger {
+    color: var(--moda-red)
+}
+
+.text-warning {
+    color: var(--moda-orange)
+}
+
+.text-info {
+    color: var(--moda-dark-gray)
+}
+
+.text-light {
+    color: var(--moda-light-gray)
+}
+
+.text-dark {
+    color: var(--moda-dark-gray)
+}
+
+.text-muted {
+    color: var(--moda-light-gray)
+}
+
+.text-white {
+    color: var(--moda-white)
+}
+
+.bg-primary {
+    color: var(--moda-dark-green)
+}
+
+.bg-secondary {
+    color: var(--moda-dark-green)
+}
+
+.bg-success {
+    color: var(--moda-green)
+}
+
+.bg-danger {
+    color: var(--moda-red)
+}
+
+.bg-warning {
+    color: var(--moda-orange)
+}
+
+.bg-info {
+    color: var(--moda-dark-gray)
+}
+
+.bg-light {
+    color: var(--moda-light-gray)
+}
+
+.bg-dark {
+    color: var(--moda-dark-gray)
+}
+
+.bg-muted {
+    color: var(--moda-light-gray)
+}
+
+.bg-white {
+    color: var(--moda-white)
+}
+
+.btn-primary {
+    --bs-btn-color: var(--moda-white);
+    --bs-btn-bg: var(--moda-green);
+    --bs-btn-border-color: var(--moda-light-green);
+    --bs-btn-hover-color: var(--moda-white);
+    --bs-btn-hover-bg: var(--moda-light-green);
+    --bs-btn-hover-border-color: var(--moda-bright-green);
+    --bs-btn-focus-shadow-rgb: var(--moda-green);
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: var(--moda-light-green);
+    --bs-btn-active-border-color: var(--moda-bright-green);
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+    --bs-btn-disabled-color: var(--moda-white);
+    --bs-btn-disabled-bg: var(--moda-light-gray);
+    --bs-btn-disabled-border-color: var(--moda-dark-gray);
+}
+
+.card {
+    background-color: var(--moda-light-brown);
+}
+
+/* Home Page */
+
+.moda-customer-explore-card {
+    width: 300px;
+    z-index: 1;
+    position: fixed;
+    left: 150px;
+    top: 200px;
+
+}
+
+.moda-employee-explore-card {
+    width: 300px;
+    z-index: 1;
+    position: fixed;
+    left: 150px;
+    top: 500px;
+}
+
+/* Menu Items */
+
+.moda-menu-item {
+    margin-top: 10px;
+    border-width: 1px;
+    border-color: var(--moda-brown)
+}
+
+.moda-menu-item-picture {
+    /* 800 / 533 = 1.5, 128 * 1.5 = 192 */
+    margin: 10px;
+}
+
+.moda-menu-item-name {
+}
+
+.moda-menu-item-cost {
+}
+
+.moda-menu-item-quantity {
+}
+
+/* Cart Items */
+
+.moda-cart-item {
+    margin-top: 10px;
+    border-width: 1px;
+    border-color: var(--moda-brown)
+}
+
+.moda-cart-item-name {
+}
+
+.moda-cart-item-cost {
+}
+
+.moda-cart-item-quantity {
+}
+
+/* Orders */
+
+.moda-order {
+    margin-top: 10px;
+    border-width: 1px;
+    border-color: var(--moda-brown)
+}
