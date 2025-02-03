@@ -7,6 +7,8 @@ import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.apache.wicket.util.file.IResourceFinder;
+import org.apache.wicket.util.file.Path;
 import org.apache.wicket.util.resource.ResourceStreamNotFoundException;
 
 import java.io.IOException;
@@ -58,7 +60,7 @@ public class ModaCoffeeWebPage extends WebPage implements ModaCoffeeComponent
             for (var finder : getApplication().getResourceSettings().getResourceFinders())
             {
                 // and if the finder locates the resource <page-class>.style.yaml,
-                try (var resource = finder.find(getPageClass(), getPageClass().getSimpleName() + ".style.yaml"))
+                try (var resource = finder.find(getPageClass(), styleYamlPath(finder)))
                 {
                     if (resource != null)
                     {
@@ -86,5 +88,19 @@ public class ModaCoffeeWebPage extends WebPage implements ModaCoffeeComponent
             }
         }
         return styler;
+    }
+
+    private String styleYamlPath(final IResourceFinder finder)
+    {
+        var path = getPageClass().getSimpleName() + ".style.yaml";
+
+        // When using the Path finder in Apache Wicket,
+        if (finder instanceof Path)
+        {
+            // prepend the package path as a folder path to the resource.
+            path = getPageClass().getPackageName().replaceAll("\\.", "/") + "/" + path;
+        }
+
+        return path;
     }
 }

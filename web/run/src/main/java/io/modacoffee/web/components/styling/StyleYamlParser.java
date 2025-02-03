@@ -9,6 +9,7 @@ import java.util.List;
 
 import static io.modacoffee.web.components.styling.AttributeModifier.Modification.parseModification;
 import static io.modacoffee.web.components.styling.ComponentPathPattern.parseComponentPathPattern;
+import static java.util.Objects.requireNonNull;
 
 /**
  * <p>
@@ -112,26 +113,41 @@ public class StyleYamlParser
      */
     public List<StyleRule> parseRules(String text)
     {
+        requireNonNull(text);
+
         var rules = new ArrayList<StyleRule>();
 
         // Split the text into lines,
         lines = new LinkedList<>(Arrays.asList(text.split("\n")));
 
         // then loop through the lines until we run out,
-        for (line = nextLine(); line != null; line = nextLine())
+        for (nextLine(); line != null; )
         {
-            // and if the line is not blank or a comment,
-            if (!line.isBlank() && !isComment(line))
+            // and if the line is blank or a comment,
+            if (line.isBlank() || isComment(line))
             {
-                // then the line must be the start of a YAML rule definition, so we require that,
+                // then skip it,
+                nextLine();
+            }
+            else
+            {
+                // otherwise, the line must be the start of a YAML rule definition,
                 requireExactly("- rule:");
 
-                // then we parse the required attributes in the required order and add the rule.
-                rules.add(new StyleRule(
-                    parseComponentPathPattern(requireAttribute("path")),
-                    parseModification(requireAttribute("do")),
-                    requireAttribute("attr"),
-                    requireAttribute("value")));
+                // so we parse the required attributes in the required order,
+                var path = parseComponentPathPattern(requireAttribute("path"));
+                var modification = parseModification(requireAttribute("do"));
+                var attribute = requireAttribute("attr");
+
+                // taking into account whether the modification requires a value argument (CLEAR doesn't),
+                var value = modification.requiresValue() ? requireAttribute("value") : null;
+                if (!modification.requiresValue() && lookingAtAttribute("value"))
+                {
+                    parseError(modification + " does not accept a value");
+                }
+
+                // then adding the rule to the list.
+                rules.add(new StyleRule(path, modification, attribute, value));
             }
         }
 
@@ -146,17 +162,35 @@ public class StyleYamlParser
         // If the current line is null, or it doesn't match the given text,
         if (line == null || !line.equals(text))
         {
-            // then raise a parse error.
+            // then raise a parse error,
             parseError("Expected '" + text + "', not: " + line);
         }
+
+        // otherwise, advance to the next line.
+        nextLine();
     }
 
     /**
-     * @return The next line in the list of lines
+     * Advance to the next line in the list of lines
      */
-    private String nextLine()
+    private void nextLine()
     {
-        return lines.isEmpty() ? null : lines.removeFirst();
+        line = !lines.isEmpty() ? lines.removeFirst() : null;
+    }
+
+    /**
+     * Returns true if the current line starts with the given YAML attribute
+     *
+     * @param name The name of the attribute
+     */
+    private boolean lookingAtAttribute(String name)
+    {
+        return line != null && line.startsWith(yamlAttributePrefix(name));
+    }
+
+    private static String yamlAttributePrefix(final String name)
+    {
+        return "  " + name + ": ";
     }
 
     /**
@@ -169,16 +203,23 @@ public class StyleYamlParser
     {
         // If the line doesn't start with a YAML attribute prefix of the form "  <name>: " (including the two
         // space indent, the colon and the trailing space),
-        var yamlAttributePrefix = "  " + name + ": ";
-        if (!line.startsWith(yamlAttributePrefix))
+        if (lookingAtAttribute(name))
         {
-            // signal that the required attribute was not found,
-            return parseError("Expected a line starting with '" + yamlAttributePrefix + "', not: " + line);
+            try
+            {
+                // otherwise, return the attribute value,
+                return unquote(line.substring(yamlAttributePrefix(name).length()));
+            }
+            finally
+            {
+                // but advance to the next line before we return.
+                nextLine();
+            }
         }
         else
         {
-            // otherwise, return the attribute value.
-            return unquote(line.substring(yamlAttributePrefix.length()));
+            // signal that the required attribute was not found,
+            return parseError("Expected a line starting with '" + yamlAttributePrefix(name) + "', not: " + line);
         }
     }
 

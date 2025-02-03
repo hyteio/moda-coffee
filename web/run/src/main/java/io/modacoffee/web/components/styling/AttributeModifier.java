@@ -13,9 +13,15 @@ public class AttributeModifier extends org.apache.wicket.AttributeModifier
     public enum Modification
     {
         APPEND,
+        CLEAR,
         PREPEND,
         REMOVE,
         SET;
+
+        public boolean requiresValue()
+        {
+            return this != CLEAR;
+        }
 
         public static Modification parseModification(String value)
         {
@@ -48,9 +54,10 @@ public class AttributeModifier extends org.apache.wicket.AttributeModifier
         switch (modification)
         {
             case APPEND -> attributes.add(value);
+            case CLEAR -> attributes.clear();
             case PREPEND -> attributes.addFirst(value);
-            case SET -> attributes = List.of(value);
             case REMOVE -> attributes.remove(value);
+            case SET -> attributes = List.of(value);
         }
         return String.join(" ", attributes);
     }

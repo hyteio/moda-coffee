@@ -1,10 +1,43 @@
 package io.modacoffee.web.components.styling;
 
+import org.apache.wicket.WicketRuntimeException;
+
 public class ComponentPathPattern extends ComponentPath
 {
-    public static ComponentPathPattern parseComponentPathPattern(String pattern)
+    /**
+     * Parses the given text into a {@link ComponentPathPattern}. Valid path elements can be wildcard values or text
+     * values containing alphanumeric characters, digits, dashes and underscores.
+     *
+     * @param text The text to parse
+     * @return The pattern
+     */
+    public static ComponentPathPattern parseComponentPathPattern(String text)
     {
-        return (ComponentPathPattern) new ComponentPathPattern().addAll(pattern.split("/"));
+        var path = new ComponentPathPattern();
+        for (var element : text.split("/"))
+        {
+            path.add(checkElement(element));
+        }
+        if (path.size() == 0)
+        {
+            parseError("A path pattern must contain at least one path element");
+        }
+        return path;
+    }
+
+    /**
+     * Checks the given path element, raising a parsing error if it is not valid
+     *
+     * @param element The element to check
+     * @return The element for chaining
+     */
+    private static String checkElement(final String element)
+    {
+        if (isWildcard(element) || element.matches("[A-Za-z0-9-_]+"))
+        {
+            return element;
+        }
+        return parseError("Not a valid path element: '" + element + "'");
     }
 
     /**
@@ -15,39 +48,43 @@ public class ComponentPathPattern extends ComponentPath
      */
     public boolean matches(ComponentPath candidate)
     {
-        // If this pattern and the candidate path are the same length,
-        if (size() == candidate.size())
-        {
-            // then just compare each element 1:1.
-            return matchEachElement(candidate);
-        }
-
-        // If the head of the pattern matches the head of the candidate,
+        // Get the first element of this pattern,
         var head = head();
-        if (head.equals(candidate.head()))
+        if (head != null)
         {
-            // then the pattern matches if the two tails match.
-            return tail().matches(candidate.tail());
-        }
-
-        // If the head didn't match, but it's a wildcard,
-        if (isWildcard(head))
-        {
-            // then we can loop through the tail of the candidate,
-            var tail = candidate.tail();
-            while (tail.size() > 0)
+            // and if the pattern and candidate are both single elements,
+            if (size() == 1 && candidate.size() == 1)
             {
-                // and if this pattern matches that remainder,
-                if (matches(candidate.tail()))
+                // return true if those two elements match.
+                return matchElements(head, candidate.head());
+            }
+
+            // If the head of the pattern precisely matches (no wildcard allowed) the head of the candidate,
+            if (head.equals(candidate.head()))
+            {
+                // then the pattern matches if the tail of this pattern matches the tail of the candidate.
+                return hasTail() && candidate.hasTail() && tail().matches(candidate.tail());
+            }
+
+            // If the head didn't match, but it's a wildcard,
+            if (isWildcard(head))
+            {
+                // then the match is successful if the tail of this pattern matches the candidate (in such
+                // a case, the wildcard doesn't consume further input, for example, when */a/b is matched
+                // against a/b),
+                if (hasTail() && tail().matches(candidate))
                 {
-                    // then we matched fully,
                     return true;
                 }
 
-                // otherwise, we can try assuming the wildcard matches the
-                // head of the candidate and move forward to see if the remainder
-                // of the candidate matches.
-                tail = tail.tail();
+                // OR
+
+                // the match is successful if this pattern matches the tail of the candidate (in such a case,
+                // the wildcard consumes the next input element, for example, when */a/b is matched against x/a/b).
+                if (candidate.hasTail())
+                {
+                    return matches(candidate.tail());
+                }
             }
         }
 
@@ -55,35 +92,11 @@ public class ComponentPathPattern extends ComponentPath
     }
 
     /**
-     * Checks this pattern element-by element against the candidate path. The candidate path must be the same length as
-     * this path pattern.
-     *
-     * @param candidate The candidate path to match
-     * @return True if the candidate matches this pattern.
+     * Returns true if the given pattern element matches the given path element
      */
-    private boolean matchEachElement(final ComponentPath candidate)
+    private static boolean matchElements(final String patternElement, final String pathElement)
     {
-        assert size() == candidate.size();
-
-        var index = 0;
-
-        // For each element in the given path,
-        for (var at : candidate)
-        {
-            // get the next element of this pattern path,
-            var next = at(index++);
-
-            // and if it's not a wildcard and the elements don't match,
-            if (!isWildcard(next) && !at.equals(next))
-            {
-                // then this path doesn't match the pattern
-                return false;
-            }
-        }
-
-        // If we got to the end via wildcards and/or matching elements, then
-        // this path matches the pattern.
-        return index == size();
+        return isWildcard(patternElement) || patternElement.equals(pathElement);
     }
 
     protected ComponentPathPattern newComponentPath()
@@ -97,8 +110,19 @@ public class ComponentPathPattern extends ComponentPath
         return (ComponentPathPattern) super.tail();
     }
 
-    private boolean isWildcard(final String next)
+    /**
+     * Returns true if the given path element is a wildcard
+     */
+    private static boolean isWildcard(final String element)
     {
-        return next.equals("*");
+        return element.equals("*");
+    }
+
+    /**
+     * Signal a parsing error by throwing an exception
+     */
+    private static String parseError(String error)
+    {
+        throw new WicketRuntimeException(error);
     }
 }

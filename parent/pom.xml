@@ -243,7 +243,7 @@
 					<include>**/*.gif</include>
 					<include>**/*.png</include>
           <include>**/*.properties</include>
-          <include>**/*.style</include>
+          <include>**/*.yaml</include>
         </includes>
       </resource>
     </resources>
