@@ -1,0 +1,12 @@
+
+- rule:
+  path: "*/customer-explore-card/*/card-panel"
+  do: remove
+  attr: class
+  value: "card"
+
+- rule:
+  path: "*/customer-explore-card/*/card-panel"
+  do: append
+  attr: class
+  value: "debug"

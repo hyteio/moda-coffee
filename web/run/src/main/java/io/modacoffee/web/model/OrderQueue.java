@@ -25,7 +25,8 @@ public class OrderQueue
 
     public void add(Cart cart)
     {
-        orders.add(new Order(cart));
+        // Add a new order to the queue, making a copy of the cart for the order
+        orders.add(new Order(cart.copy()));
     }
 
     public void cancel(Order order)

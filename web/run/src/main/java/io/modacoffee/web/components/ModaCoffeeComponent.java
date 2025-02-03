@@ -45,8 +45,7 @@ public interface ModaCoffeeComponent
      * Returns a new Bootstrap button that links to the given bookmarkable page using the given label
      */
     default BootstrapBookmarkablePageLink<String> newButtonLink(String id,
-                                                                Class<? extends Page> pageType,
-                                                                String label)
+                                                                String label, Class<? extends Page> pageType)
     {
         return new BootstrapBookmarkablePageLink<String>(id, pageType, new PageParameters(), Buttons.Type.Primary)
             .setLabel(() -> label);
@@ -89,7 +88,15 @@ public interface ModaCoffeeComponent
      */
     default void updateFeedbackPanel(Component component, AjaxRequestTarget ajax)
     {
-        var feedbackPanel = component.findParent(ModaCoffeeWebPage.class).get("feedback-panel");
-        ajax.add(feedbackPanel);
+        var feedbackPanel = component.findParent(ModaCoffeeWebPage.class);
+        if (feedbackPanel == null && component instanceof ModaCoffeeWebPage)
+        {
+            feedbackPanel = (ModaCoffeeWebPage) component;
+        }
+        if (feedbackPanel != null)
+        {
+            feedbackPanel.get("feedback-panel");
+            ajax.add(feedbackPanel);
+        }
     }
 }

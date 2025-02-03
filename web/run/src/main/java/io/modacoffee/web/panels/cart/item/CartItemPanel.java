@@ -2,8 +2,8 @@ package io.modacoffee.web.panels.cart.item;
 
 import io.modacoffee.web.components.ModaCoffeeComponent;
 import io.modacoffee.web.model.CartItem;
+import io.modacoffee.web.panels.card.CardPanel;
 import io.modacoffee.web.panels.menu.item.picture.MenuItemPicturePanel;
-import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
 
@@ -15,9 +15,14 @@ public class CartItemPanel extends Panel implements ModaCoffeeComponent
     {
         super(id, model);
 
-        add(new Label("name", () -> model.getObject().item().name()));
-        add(new Label("cost", NumberFormat.getCurrencyInstance().format(model.getObject().item().cost())));
-        add(new MenuItemPicturePanel("picture", () -> model.getObject().item()));
-        add(new Label("quantity", () -> "$" + model.getObject().quantity()));
+        var cartItem = model.getObject();
+        var menuItem = cartItem.item();
+
+        add(CardPanel.builder("card")
+            .child(childId -> new MenuItemPicturePanel(childId, () -> menuItem))
+            .text(menuItem.name())
+            .text("Cost: " + NumberFormat.getCurrencyInstance().format(menuItem.cost()))
+            .text("Quantity: " + cartItem.quantity())
+            .build());
     }
 }

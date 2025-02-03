@@ -242,6 +242,8 @@
 					<include>**/*.jpg</include>
 					<include>**/*.gif</include>
 					<include>**/*.png</include>
+          <include>**/*.properties</include>
+          <include>**/*.yaml</include>
         </includes>
       </resource>
     </resources>

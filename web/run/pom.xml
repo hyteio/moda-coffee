@@ -99,7 +99,7 @@
       <artifactId>log4j-core</artifactId>
       <version>${moda.log4j2.version}</version>
       <scope>compile</scope>
-    </dependency><dependency><groupId>de.agilecoders.wicket</groupId><artifactId>wicket-bootstrap-themes</artifactId><version>7.0.5</version></dependency>
+    </dependency><dependency><groupId>de.agilecoders.wicket</groupId><artifactId>wicket-bootstrap-themes</artifactId><version>7.0.5</version></dependency><dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>RELEASE</version><scope>test</scope></dependency>
   </dependencies>
   <build>
     <plugins>

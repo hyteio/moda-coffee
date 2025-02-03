@@ -3,6 +3,7 @@ package io.modacoffee.web.pages.home;
 import io.modacoffee.web.pages.ModaCoffeeWebPage;
 import io.modacoffee.web.pages.menu.MenuPage;
 import io.modacoffee.web.pages.order.status.OrderStatusPage;
+import io.modacoffee.web.panels.card.CardPanel;
 import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
@@ -18,7 +19,17 @@ public class HomePage extends ModaCoffeeWebPage
         super(parameters);
 
         add(new Image("background", imageResource(getClass(), "resources/ModaCoffeeBackground.jpg")));
-        add(newButtonLink("menu", MenuPage.class, "Explore as a Customer"));
-        add(newButtonLink("order-status", OrderStatusPage.class, "Explore as an Employee"));
+
+        add(CardPanel.builder("customer-explore-card")
+            .title(getString("customer-explore-title"))
+            .text(getString("customer-explore-text"))
+            .buttonLink(getString("customer-explore-button-label"), MenuPage.class)
+            .build());
+
+        add(CardPanel.builder("employee-explore-card")
+            .title(getString("employee-explore-title"))
+            .text(getString("employee-explore-text"))
+            .buttonLink(getString("employee-explore-button-label"), OrderStatusPage.class)
+            .build());
     }
 }

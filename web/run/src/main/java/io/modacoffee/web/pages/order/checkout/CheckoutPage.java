@@ -1,6 +1,7 @@
 package io.modacoffee.web.pages.order.checkout;
 
 import io.modacoffee.web.pages.ModaCoffeeWebPage;
+import io.modacoffee.web.pages.order.thanks.ThankYouPage;
 import io.modacoffee.web.panels.cart.CartPanel;
 import org.apache.wicket.markup.html.basic.Label;
 
@@ -20,17 +21,19 @@ public class CheckoutPage extends ModaCoffeeWebPage
         add(new CartPanel("cart"));
 
         // show the total cost,
-        add(new Label("total-cost", cart::totalCost));
+        add(new Label("total", cart::totalCost));
 
         // and if the user places the order,
         add(newAjaxButton("place-order", "Place Order", ajax ->
         {
             // add the contents of their cart to the order queue,
-            orderQueue().add(cart(this));
+            orderQueue().add(cart);
+
+            // then clear their cart,
+            cart.clear();
 
             // and thank them.
-            info("Thank you for your order!");
-            updateFeedbackPanel(this, ajax);
+            setResponsePage(ThankYouPage.class);
         }));
     }
 }

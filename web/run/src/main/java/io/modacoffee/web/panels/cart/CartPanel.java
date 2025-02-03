@@ -17,7 +17,6 @@ public class CartPanel extends ModaCofeePanel
         {
             repeater.add(new CartItemPanel(repeater.newChildId(), () -> item));
         }
-        repeater.setOutputMarkupId(true);
         add(repeater);
 
         // and also allow the panel itself to be dynamically updated.

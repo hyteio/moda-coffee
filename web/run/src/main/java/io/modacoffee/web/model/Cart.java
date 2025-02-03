@@ -31,6 +31,16 @@ public class Cart implements Serializable
     }
 
     /**
+     * Makes a copy of this cart
+     */
+    public Cart copy()
+    {
+        var copy = new Cart();
+        copy.items.addAll(items);
+        return copy;
+    }
+
+    /**
      * Adds the given item to this cart. If the item is already in this cart, its quantity is increased by one.
      */
     public void add(MenuItem item)
@@ -44,6 +54,14 @@ public class Cart implements Serializable
         {
             items.add(new CartItem(item));
         }
+    }
+
+    /**
+     * Remove all items from this cart
+     */
+    public void clear()
+    {
+        items.clear();
     }
 
     /**

@@ -6,15 +6,18 @@ import io.modacoffee.web.pages.home.HomePage;
 import io.modacoffee.web.pages.menu.MenuPage;
 import io.modacoffee.web.pages.order.checkout.CheckoutPage;
 import io.modacoffee.web.pages.order.status.OrderStatusPage;
+import io.modacoffee.web.pages.order.thanks.ThankYouPage;
 import org.apache.wicket.Page;
 import org.apache.wicket.Session;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.request.Request;
 import org.apache.wicket.request.Response;
+import org.apache.wicket.util.file.Path;
 
 import java.io.File;
 import java.time.Duration;
 
+import static org.apache.wicket.RuntimeConfigurationType.DEVELOPMENT;
 import static org.apache.wicket.settings.ExceptionSettings.SHOW_EXCEPTION_PAGE;
 
 public class ModaCoffeeWebApplication extends WebApplication
@@ -35,6 +38,7 @@ public class ModaCoffeeWebApplication extends WebApplication
         mountPage("/menu", MenuPage.class);
         mountPage("/order/checkout", CheckoutPage.class);
         mountPage("/order/status", OrderStatusPage.class);
+        mountPage("/order/thank-you", ThankYouPage.class);
     }
 
     @Override
@@ -51,14 +55,23 @@ public class ModaCoffeeWebApplication extends WebApplication
 
     private void configureApacheWicket()
     {
-        if (System.getenv("DEBUG").equalsIgnoreCase("true"))
+        if (getConfigurationType() == DEVELOPMENT)
         {
-            getDebugSettings().setComponentUseCheck(true);
-            getExceptionSettings().setUnexpectedExceptionDisplay(SHOW_EXCEPTION_PAGE);
-            getResourceSettings().setResourcePollFrequency(Duration.ofSeconds(3));
-        }
+            getDebugSettings()
+                .setComponentUseCheck(true)
+                .setDevelopmentUtilitiesEnabled(true)
+                .setOutputMarkupContainerClassName(true);
 
-        getMarkupSettings().setDefaultMarkupEncoding("UTF-8");
+            getExceptionSettings().setUnexpectedExceptionDisplay(SHOW_EXCEPTION_PAGE);
+
+            getMarkupSettings()
+                .setStripWicketTags(false)
+                .setStripComments(false);
+
+            getResourceSettings()
+                .setResourcePollFrequency(Duration.ofSeconds(1))
+                .getResourceFinders().addFirst(new Path("src/main/java"));
+        }
     }
 
     private void initializeKaraf()
