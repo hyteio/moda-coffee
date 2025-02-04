@@ -38,9 +38,12 @@ body {
 }
 
 .moda-centered {
-    text-align: centered;
+    margin: auto;
+}
+
+.moda-center-content {
+    display: flex;
     justify-content: center;
-    align-items: center;
 }
 
 .moda-top-margin {
@@ -164,16 +167,21 @@ body {
 
 /* Home Page */
 
+.moda-card {
+    padding: 10px;
+}
+
 .moda-customer-explore-card {
+    background-color: var(--moda-light-brown);
     width: 300px;
     z-index: 1;
     position: fixed;
     left: 150px;
     top: 200px;
-
 }
 
 .moda-employee-explore-card {
+    background-color: var(--moda-light-brown);
     width: 300px;
     z-index: 1;
     position: fixed;

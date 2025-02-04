@@ -1,6 +1,6 @@
-package io.modacoffee.web.panels.card.buttons.ajax;
+package io.modacoffee.web.panels.card.sections.buttons.ajax;
 
-import io.modacoffee.web.panels.card.CardSection;
+import io.modacoffee.web.panels.card.sections.CardSection;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 
 import java.util.function.Consumer;

@@ -1,12 +1,12 @@
 
 - rule:
-  path: "*/customer-explore-card/*/card-panel"
-  do: remove
-  attr: class
-  value: "card"
-
-- rule:
-  path: "*/customer-explore-card/*/card-panel"
+  path: "*/row"
   do: append
   attr: class
-  value: "debug"
+  value: "moda-center-content"
+
+- rule:
+  path: "*/title"
+  do: append
+  attr: class
+  value: "moda-centered"

@@ -1,6 +1,6 @@
-package io.modacoffee.web.panels.card.title;
+package io.modacoffee.web.panels.card.sections.title;
 
-import io.modacoffee.web.panels.card.CardSection;
+import io.modacoffee.web.panels.card.sections.CardSection;
 import org.apache.wicket.markup.html.basic.Label;
 
 public class CardTitle extends CardSection

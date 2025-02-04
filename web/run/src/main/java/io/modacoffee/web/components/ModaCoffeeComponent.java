@@ -6,7 +6,7 @@ import de.agilecoders.wicket.core.markup.html.bootstrap.button.Buttons;
 import io.modacoffee.web.model.Cart;
 import io.modacoffee.web.model.OrderQueue;
 import io.modacoffee.web.pages.ModaCoffeeWebPage;
-import io.modacoffee.web.panels.ModaCofeePanel;
+import io.modacoffee.web.panels.ModaCoffeePanel;
 import io.modacoffee.web.run.ModaCoffeeSession;
 import org.apache.wicket.Component;
 import org.apache.wicket.Page;
@@ -19,12 +19,12 @@ import java.util.function.Consumer;
 
 /**
  * Functionality applicable to all Moda components. The {@link ModaCoffeeWebPage} class implements this interface as
- * well as the {@link ModaCofeePanel} class.
+ * well as the {@link ModaCoffeePanel} class.
  *
  * @see ModaCoffeeWebPage
- * @see ModaCofeePanel
+ * @see ModaCoffeePanel
  */
-public interface ModaCoffeeComponent
+public interface ModaCoffeeComponent extends ModaStyleTrait
 {
     /**
      * Returns a new Bootstrap AJAX button that calls the given code

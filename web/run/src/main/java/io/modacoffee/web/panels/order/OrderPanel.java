@@ -3,7 +3,7 @@ package io.modacoffee.web.panels.order;
 import io.modacoffee.web.components.ModaCoffeeComponent;
 import io.modacoffee.web.model.Order;
 import io.modacoffee.web.pages.ModaCoffeeWebPage;
-import io.modacoffee.web.panels.card.CardPanel;
+import io.modacoffee.web.panels.card.cards.horizontal.HorizontalCard;
 import io.modacoffee.web.panels.cart.item.CartItemPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.markup.repeater.RepeatingView;
@@ -15,32 +15,35 @@ public class OrderPanel extends Panel implements ModaCoffeeComponent
     {
         super(id, model);
 
-        add(CardPanel.builder("card")
-            .child(childId -> itemsRepeater(model))
-            .ajaxButton("Cancel", ajax ->
-            {
-                orderQueue().cancel(model.getObject());
-                getWebSession().info("Order cancelled");
-                updateFeedbackPanel(this, ajax);
-                setResponsePage(refresh);
-            })
-            .ajaxButton("Complete", ajax ->
-            {
-                orderQueue().complete(model.getObject());
-                getWebSession().info("Order completed");
-                updateFeedbackPanel(this, ajax);
-                setResponsePage(refresh);
-            })
+        add(HorizontalCard.builder("card")
+            .column(column -> column
+                .child(childId -> itemsRepeater(childId, model))
+            )
+            .column(column -> column
+                .ajaxButton("Cancel", ajax ->
+                {
+                    orderQueue().cancel(model.getObject());
+                    getWebSession().info("Order cancelled");
+                    updateFeedbackPanel(this, ajax);
+                    setResponsePage(refresh);
+                })
+                .ajaxButton("Complete", ajax ->
+                {
+                    orderQueue().complete(model.getObject());
+                    getWebSession().info("Order completed");
+                    updateFeedbackPanel(this, ajax);
+                    setResponsePage(refresh);
+                }))
             .build());
 
         setOutputMarkupId(true);
     }
 
-    private RepeatingView itemsRepeater(final IModel<Order> model)
+    private RepeatingView itemsRepeater(String childId, final IModel<Order> model)
     {
         // Render the items in the order as cart items with a quantity, adding a markup id
         // to the output so that Wicket can refresh the view via AJAX,
-        var repeater = new RepeatingView("items");
+        var repeater = new RepeatingView(childId);
         for (var item : model.getObject().items())
         {
             repeater.add(new CartItemPanel(repeater.newChildId(), () -> item));

@@ -1,6 +1,6 @@
-package io.modacoffee.web.panels.card.buttons.link;
+package io.modacoffee.web.panels.card.sections.buttons.link;
 
-import io.modacoffee.web.panels.card.CardSection;
+import io.modacoffee.web.panels.card.sections.CardSection;
 import org.apache.wicket.Page;
 
 public class CardButtonLink extends CardSection

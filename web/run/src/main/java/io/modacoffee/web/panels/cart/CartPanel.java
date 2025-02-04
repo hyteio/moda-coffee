@@ -1,10 +1,10 @@
 package io.modacoffee.web.panels.cart;
 
-import io.modacoffee.web.panels.ModaCofeePanel;
+import io.modacoffee.web.panels.ModaCoffeePanel;
 import io.modacoffee.web.panels.cart.item.CartItemPanel;
 import org.apache.wicket.markup.repeater.RepeatingView;
 
-public class CartPanel extends ModaCofeePanel
+public class CartPanel extends ModaCoffeePanel
 {
     public CartPanel(String id)
     {

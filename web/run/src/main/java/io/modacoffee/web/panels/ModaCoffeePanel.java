@@ -7,14 +7,14 @@ import org.apache.wicket.model.IModel;
 /**
  * Base class for Moda Coffee reusable panels
  */
-public class ModaCofeePanel extends Panel implements ModaCoffeeComponent
+public class ModaCoffeePanel extends Panel implements ModaCoffeeComponent
 {
-    public ModaCofeePanel(final String id)
+    public ModaCoffeePanel(final String id)
     {
         super(id);
     }
 
-    public ModaCofeePanel(final String id, final IModel<?> model)
+    public ModaCoffeePanel(final String id, final IModel<?> model)
     {
         super(id, model);
     }

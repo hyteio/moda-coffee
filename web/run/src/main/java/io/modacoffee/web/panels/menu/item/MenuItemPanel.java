@@ -2,7 +2,7 @@ package io.modacoffee.web.panels.menu.item;
 
 import io.modacoffee.web.components.ModaCoffeeComponent;
 import io.modacoffee.web.model.MenuItem;
-import io.modacoffee.web.panels.card.CardPanel;
+import io.modacoffee.web.panels.card.cards.vertical.VerticalCard;
 import io.modacoffee.web.panels.menu.item.picture.MenuItemPicturePanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
@@ -17,16 +17,16 @@ public class MenuItemPanel extends Panel implements ModaCoffeeComponent
 
         var menuItem = model.getObject();
 
-        add(CardPanel.builder("card")
-            .child(childId -> new MenuItemPicturePanel(childId, () -> menuItem))
-            .text(menuItem.name())
-            .text("Cost: " + NumberFormat.getCurrencyInstance().format(menuItem.cost()))
-            .ajaxButton("Add to Cart", ajax ->
+        add(VerticalCard.builder("card")
+            .row(row -> row.child(childId -> new MenuItemPicturePanel(childId, () -> menuItem)))
+            .row(row -> row.text(menuItem.name()))
+            .row(row -> row.text("Cost: " + NumberFormat.getCurrencyInstance().format(menuItem.cost())))
+            .row(row -> row.ajaxButton("Add to Cart", ajax ->
             {
                 cart(this).add(model.getObject());
                 info("Added '" + model.getObject().name() + "' to cart");
                 updateFeedbackPanel(this, ajax);
-            })
+            }))
             .build());
     }
 }

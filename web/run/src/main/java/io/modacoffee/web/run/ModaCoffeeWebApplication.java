@@ -30,8 +30,10 @@ public class ModaCoffeeWebApplication extends WebApplication
 
         super.init();
 
-        configureApacheWicket();
+        // Note that Wicket Bootstrap integration must be configured first here because the Bootstrap.install()
+        // method stomps on the strip-wicket-tags markup setting.
         configureApacheWicketBootstrap();
+        configureApacheWicket();
 
         mountPage("/", HomePage.class);
         mountPage("/home", HomePage.class);
