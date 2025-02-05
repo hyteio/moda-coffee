@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-import static io.modacoffee.web.components.styling.AttributeModifier.Modification.parseModification;
+import static io.modacoffee.web.components.styling.AttributeEditor.Modification.parseModification;
 import static io.modacoffee.web.components.styling.ComponentPathPattern.parseComponentPathPattern;
 import static java.util.Objects.requireNonNull;
 

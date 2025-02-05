@@ -1,15 +1,15 @@
 package io.modacoffee.web.components.styling;
 
-import io.modacoffee.web.components.styling.AttributeModifier.Modification;
+import io.modacoffee.web.components.styling.AttributeEditor.Modification;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.function.Consumer;
 
-import static io.modacoffee.web.components.styling.AttributeModifier.Modification.APPEND;
-import static io.modacoffee.web.components.styling.AttributeModifier.Modification.CLEAR;
-import static io.modacoffee.web.components.styling.AttributeModifier.Modification.PREPEND;
-import static io.modacoffee.web.components.styling.AttributeModifier.Modification.REMOVE;
+import static io.modacoffee.web.components.styling.AttributeEditor.Modification.APPEND;
+import static io.modacoffee.web.components.styling.AttributeEditor.Modification.CLEAR;
+import static io.modacoffee.web.components.styling.AttributeEditor.Modification.PREPEND;
+import static io.modacoffee.web.components.styling.AttributeEditor.Modification.REMOVE;
 import static io.modacoffee.web.components.styling.ComponentPathPattern.parseComponentPathPattern;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;

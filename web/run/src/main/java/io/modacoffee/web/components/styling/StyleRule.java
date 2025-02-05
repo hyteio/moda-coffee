@@ -2,7 +2,7 @@ package io.modacoffee.web.components.styling;
 
 import org.apache.wicket.Component;
 
-import static io.modacoffee.web.components.styling.AttributeModifier.Modification;
+import static io.modacoffee.web.components.styling.AttributeEditor.Modification;
 
 /**
  * If the component path matches the pattern, the given attribute is modified by applying the given modification with
@@ -29,7 +29,7 @@ public record StyleRule(ComponentPathPattern pattern,
         if (pattern.matches(new ComponentPath(component)))
         {
             // then add the attribute modifier that will make the change specified by the rule.
-            component.add(new AttributeModifier(modification, attribute, value));
+            component.add(new AttributeEditor(modification, attribute, value));
         }
     }
 }

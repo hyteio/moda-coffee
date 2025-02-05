@@ -1,5 +1,7 @@
 package io.modacoffee.web.components.styling;
 
+import org.apache.wicket.AttributeModifier;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,7 +10,7 @@ import java.util.List;
 /**
  * Conditionally modifies attributes based on their Apache Wicket path from the page root.
  */
-public class AttributeModifier extends org.apache.wicket.AttributeModifier
+public class AttributeEditor extends AttributeModifier
 {
     public enum Modification
     {
@@ -38,7 +40,7 @@ public class AttributeModifier extends org.apache.wicket.AttributeModifier
      * @param attribute The attribute name
      * @param value The value to append-to, prepend-to or replace the existing value
      */
-    public AttributeModifier(Modification modification, String attribute, String value)
+    public AttributeEditor(Modification modification, String attribute, String value)
     {
         super(attribute, value);
 
